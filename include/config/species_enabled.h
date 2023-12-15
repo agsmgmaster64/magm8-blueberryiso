@@ -365,7 +365,7 @@
 #define P_FAMILY_STUNFISK                P_GEN_5_POKEMON
 #define P_FAMILY_MIENFOO                 P_GEN_5_POKEMON
 #define P_FAMILY_DRUDDIGON               P_GEN_5_POKEMON
-#define P_FAMILY_GOLETT                  P_GEN_5_POKEMON
+#define P_FAMILY_GOLETT                  P_BLUEBERRY_DEX_POKEMON
 #define P_FAMILY_PAWNIARD                P_GEN_5_POKEMON
 #define P_FAMILY_BOUFFALANT              P_GEN_5_POKEMON
 #define P_FAMILY_RUFFLET                 P_BLUEBERRY_DEX_POKEMON
@@ -431,7 +431,7 @@
 #define P_FAMILY_PIKIPEK                 P_BLUEBERRY_DEX_POKEMON
 #define P_FAMILY_YUNGOOS                 P_GEN_7_POKEMON
 #define P_FAMILY_GRUBBIN                 P_GEN_7_POKEMON
-#define P_FAMILY_CRABRAWLER              P_GEN_7_POKEMON
+#define P_FAMILY_CRABRAWLER              P_BLUEBERRY_DEX_POKEMON
 #define P_FAMILY_ORICORIO                P_BLUEBERRY_DEX_POKEMON
 #define P_FAMILY_CUTIEFLY                P_GEN_7_POKEMON
 #define P_FAMILY_ROCKRUFF                P_GEN_7_POKEMON
@@ -444,7 +444,7 @@
 #define P_FAMILY_SALANDIT                P_GEN_7_POKEMON
 #define P_FAMILY_STUFFUL                 P_GEN_7_POKEMON
 #define P_FAMILY_BOUNSWEET               P_GEN_7_POKEMON
-#define P_FAMILY_COMFEY                  P_GEN_7_POKEMON
+#define P_FAMILY_COMFEY                  P_BLUEBERRY_DEX_POKEMON
 #define P_FAMILY_ORANGURU                P_GEN_7_POKEMON
 #define P_FAMILY_PASSIMIAN               P_GEN_7_POKEMON
 #define P_FAMILY_WIMPOD                  P_GEN_7_POKEMON
