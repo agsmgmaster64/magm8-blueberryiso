@@ -17,6 +17,7 @@
 #include "field_weather.h"
 #include "graphics.h"
 #include "item.h"
+#include "level_caps.h"
 #include "link.h"
 #include "main.h"
 #include "overworld.h"
@@ -87,6 +88,7 @@ EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManagers[MON_SPR_GF
 EWRAM_DATA static u8 sTriedEvolving = 0;
 
 #include "data/battle_moves.h"
+#include "data/abilities.h"
 
 // Used in an unreferenced function in RS.
 // Unreferenced here and in FRLG.
@@ -295,6 +297,35 @@ const struct SpindaSpot gSpindaSpotGraphics[] =
 };
 
 #include "data/pokemon/item_effects.h"
+
+const u8 *const gNatureNamePointers[NUM_NATURES] =
+{
+    [NATURE_HARDY] = COMPOUND_STRING("Hardy"),
+    [NATURE_LONELY] = COMPOUND_STRING("Lonely"),
+    [NATURE_BRAVE] = COMPOUND_STRING("Brave"),
+    [NATURE_ADAMANT] = COMPOUND_STRING("Adamant"),
+    [NATURE_NAUGHTY] = COMPOUND_STRING("Naughty"),
+    [NATURE_BOLD] = COMPOUND_STRING("Bold"),
+    [NATURE_DOCILE] = COMPOUND_STRING("Docile"),
+    [NATURE_RELAXED] = COMPOUND_STRING("Relaxed"),
+    [NATURE_IMPISH] = COMPOUND_STRING("Impish"),
+    [NATURE_LAX] = COMPOUND_STRING("Lax"),
+    [NATURE_TIMID] = COMPOUND_STRING("Timid"),
+    [NATURE_HASTY] = COMPOUND_STRING("Hasty"),
+    [NATURE_SERIOUS] = COMPOUND_STRING("Serious"),
+    [NATURE_JOLLY] = COMPOUND_STRING("Jolly"),
+    [NATURE_NAIVE] = COMPOUND_STRING("Naive"),
+    [NATURE_MODEST] = COMPOUND_STRING("Modest"),
+    [NATURE_MILD] = COMPOUND_STRING("Mild"),
+    [NATURE_QUIET] = COMPOUND_STRING("Quiet"),
+    [NATURE_BASHFUL] = COMPOUND_STRING("Bashful"),
+    [NATURE_RASH] = COMPOUND_STRING("Rash"),
+    [NATURE_CALM] = COMPOUND_STRING("Calm"),
+    [NATURE_GENTLE] = COMPOUND_STRING("Gentle"),
+    [NATURE_SASSY] = COMPOUND_STRING("Sassy"),
+    [NATURE_CAREFUL] = COMPOUND_STRING("Careful"),
+    [NATURE_QUIRKY] = COMPOUND_STRING("Quirky"),
+};
 
 const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 {                      // Attack  Defense  Speed  Sp.Atk  Sp. Def
@@ -4959,7 +4990,7 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
         expPoints = gExperienceTables[gSpeciesInfo[species].growthRate][MAX_LEVEL];
         SetMonData(mon, MON_DATA_EXP, &expPoints);
     }
-    if (nextLevel > MAX_LEVEL || expPoints < gExperienceTables[gSpeciesInfo[species].growthRate][nextLevel])
+    if (nextLevel > GetCurrentLevelCap() || expPoints < gExperienceTables[gSpeciesInfo[species].growthRate][nextLevel])
     {
         return FALSE;
     }
@@ -5696,11 +5727,11 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
 const u8 *GetTrainerClassNameFromId(u16 trainerId)
 {
     if (trainerId > TRAINER_PARTNER(PARTNER_NONE))
-        return gTrainerClassNames[gBattlePartners[trainerId].trainerClass];
+        return gTrainerClasses[gBattlePartners[trainerId].trainerClass].name;
     else if (trainerId < TRAINERS_COUNT)
-        return gTrainerClassNames[gTrainers[trainerId].trainerClass];
+        return gTrainerClasses[gTrainers[trainerId].trainerClass].name;
 
-    return gTrainerClassNames[gTrainers[TRAINER_NONE].trainerClass];
+    return gTrainerClasses[gTrainers[TRAINER_NONE].trainerClass].name;
 }
 
 const u8 *GetTrainerNameFromId(u16 trainerId)
@@ -6168,7 +6199,7 @@ u16 SanitizeSpeciesId(u16 species)
 
 bool32 IsSpeciesEnabled(u16 species)
 {
-    return gSpeciesInfo[species].baseHP > 0;
+    return gSpeciesInfo[species].baseHP > 0 || species == SPECIES_EGG;
 }
 
 void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method)

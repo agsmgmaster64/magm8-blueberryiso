@@ -7,6 +7,7 @@ void ItemUseOutOfBattle_Rod(u8);
 void ItemUseOutOfBattle_Itemfinder(u8);
 void ItemUseOutOfBattle_PokeblockCase(u8);
 void ItemUseOutOfBattle_CoinCase(u8);
+void ItemUseOutOfBattle_PokemonBoxLink(u8);
 void ItemUseOutOfBattle_PowderJar(u8);
 void ItemUseOutOfBattle_SSTicket(u8);
 void ItemUseOutOfBattle_WailmerPail(u8);
@@ -45,6 +46,7 @@ u8 CanUseDigOrEscapeRopeOnCurMap(void);
 u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId);
 void FieldUseFunc_VsSeeker(u8 taskId);
 void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8 taskId);
+void DisplayDadsAdviceCannotUseItemMessage(u8 taskId, bool8 isUsingRegisteredKeyItemOnField);
 
 enum {
     BALL_THROW_UNABLE_TWO_MONS,
